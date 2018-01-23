@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import berkeley_bowl
+import dataset
+
+for location in berkeley_bowl.location_soups():
+
+    print(location['name'])
+    print('='*len(location['name']))
+
+    print()
+    
+    print('* {} *\n'.format(location['timestamp']))
+
+    for n, soup in enumerate(location['soups']):
+        print('{}.) {}'.format(n, soup))
+
+    print('\n')
