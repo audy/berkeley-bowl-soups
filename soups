@@ -3,16 +3,30 @@
 import berkeley_bowl
 import dataset
 
-for location in berkeley_bowl.location_soups():
+locations = list(berkeley_bowl.locations())
+
+db = dataset.connect('sqlite:////Users/austin/soups.sqlite')
+
+soups_table = db['soups']
+
+for location in berkeley_bowl.locations():
 
     print(location['name'])
     print('='*len(location['name']))
 
     print()
-    
+
     print('* {} *\n'.format(location['timestamp']))
 
     for n, soup in enumerate(location['soups']):
         print('{}.) {}'.format(n, soup))
 
     print('\n')
+
+    soups_table.insert({
+        'location_name': location['name'],
+        'timestamp': location['timestamp'],
+        'soups': ','.join(location['soups'])
+    })
+
+print('so far I have made {} soup recordings'.format(len(soups_table)))

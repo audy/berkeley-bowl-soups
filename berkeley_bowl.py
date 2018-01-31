@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 
-def location_soups():
+def locations():
     '''
     Scrape soups list of Berkeley Bowl's webpage.
     '''
