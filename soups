@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import datetime
 import berkeley_bowl
 import dataset
 
@@ -16,7 +17,13 @@ for location in berkeley_bowl.locations():
 
     print()
 
-    print('* {} *\n'.format(location['timestamp']))
+
+    if location['timestamp'].date() == datetime.datetime.today().date():
+        relative_time = 'today'
+    else:
+        relative_time = '{} day(s) ago'.format(datetime.datetime.today() - location['timestamp']).days
+
+    print('* {} ({}) *\n'.format(location['timestamp'], relative_time))
 
     for n, soup in enumerate(location['soups']):
         print('{}.) {}'.format(n, soup))
