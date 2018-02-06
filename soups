@@ -3,10 +3,14 @@
 import datetime
 import berkeley_bowl
 import dataset
+import os
 
 locations = list(berkeley_bowl.locations())
 
-db = dataset.connect('sqlite:////Users/austin/soups.sqlite')
+db_path = os.path.expanduser('~/soups.sqlite')
+
+print('---> storing soups in {}'.format(db_path))
+db = dataset.connect('sqlite:///{}'.format(db_path))
 
 soups_table = db['soups']
 
