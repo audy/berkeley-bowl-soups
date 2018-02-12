@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 import dataset
+from itertools import groupby
 
 db = dataset.connect('sqlite:////Users/austin/soups.sqlite')
 
 soups_table = db['soups']
 
+# unique by day and location
+key = lambda r: (r['location_name'], r['timestamp'])
 
-for row in soups_table:
-    print(row)
+for grp, items in groupby(sorted(soups_table, key=key), key=key):
+    print(list(items)[0])
