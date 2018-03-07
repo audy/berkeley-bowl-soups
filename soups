@@ -25,7 +25,7 @@ for location in berkeley_bowl.locations():
     if location['timestamp'].date() == datetime.datetime.today().date():
         relative_time = 'today'
     else:
-        relative_time = '{} day(s) ago'.format(datetime.datetime.today() - location['timestamp']).days
+        relative_time = '{} day(s) ago'.format((datetime.datetime.today() - location['timestamp']).days)
 
     print('* {} ({}) *\n'.format(location['timestamp'], relative_time))
 
@@ -39,5 +39,6 @@ for location in berkeley_bowl.locations():
         'timestamp': location['timestamp'],
         'soups': ','.join(location['soups'])
     })
+
 
 print('so far I have made {} soup recordings'.format(len(soups_table)))
