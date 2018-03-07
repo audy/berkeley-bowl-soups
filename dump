@@ -11,4 +11,5 @@ soups_table = db['soups']
 key = lambda r: (r['location_name'], r['timestamp'])
 
 for grp, items in groupby(sorted(soups_table, key=key), key=key):
-    print(list(items)[0])
+    items = list(items)
+    print('{} {}'.format(len(items), items[0]))
