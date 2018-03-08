@@ -3,7 +3,8 @@
 import dataset
 from itertools import groupby
 
-db = dataset.connect('sqlite:////Users/austin/soups.sqlite')
+db_path = os.path.expanduser('~/soups.sqlite')
+db = dataset.connect('sqlite:///{}'.format(db_path))
 
 soups_table = db['soups']
 
