@@ -21,7 +21,7 @@ def locations():
 
     res = requests.get(url)
 
-    soup = BeautifulSoup(res.content, 'html5lib')
+    soup = BeautifulSoup(res.content, "html.parser")
 
     locations = soup.find_all('div', class_='block-inner')[3:5]
 
