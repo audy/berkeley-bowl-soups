@@ -7,19 +7,28 @@ database
 
 - Python 3
 
-## Installation
+## Installation & Usage
 
 `pip3 install -r requirements.txt`
 
+## Docker
+
+```sh
+docker build --tag soups .
+
+docker run \
+  --rm \
+  --volume \
+  $PWD/soups.sqlite:/data/soups.sqlite \
+  soups
+```
+
+With CRON:
+
+```sh
+# The website is updated randomly so I perform extra scrapes to make sure I
+# catch all the soups
+0 */4 * * * docker run --rm --volumes /root/soups/soups.sqlite:/data/soups.sqlite soups
+```
+
 ## Usage
-
-
-## Database
-
-Scraped soup data are stored in an sqlite database in your home directory.
-
-Sqlite database looks like this:
-
-- `timestamp`
-- `location_name`
-- `soups` (comma-separated list of soups)
