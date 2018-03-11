@@ -1,6 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+import sys
+import dataset
+
+def database():
+    db_path = sys.argv[1]
+    print('connecting to db {}'.format(db_path))
+    db = dataset.connect('sqlite:///{}'.format(db_path))
+
+    return db
 
 
 def locations():
