@@ -3,6 +3,8 @@
 import berkeley_bowl
 from itertools import groupby
 
+import sys
+
 db = berkeley_bowl.database()
 
 soups_table = db['soups']
@@ -12,15 +14,18 @@ key = lambda r: (r['location_name'], r['timestamp'])
 
 all_soups = set()
 
-print('id,location_name,timestamp,soup')
+with open(sys.argv[2], 'w') as handle:
 
-for record in soups_table:
-    for soup in record['soups'].split(','):
-        row = [
-            record['id'],
-            record['location_name'],
-            record['timestamp'],
-            soup.replace(',', ';').replace("\n", '')
-        ]
+    handle.write('id,location_name,timestamp,soup\n')
 
-        print(','.join(str(i) for i in row))
+    for record in soups_table:
+        for soup in record['soups'].split(','):
+            row = [
+                record['id'],
+                record['location_name'],
+                record['timestamp'],
+                soup.replace(',', ';').replace("\n", '')
+            ]
+
+            handle.write(','.join(str(i) for i in row))
+            handle.write('\n')

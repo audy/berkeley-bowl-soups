@@ -1,4 +1,3 @@
-connecting to db soups.sqlite
 id,location_name,timestamp,soup
 1,Oregon Street Hot Soups,2018-01-22 09:00:00,BEEF BARLEY SOUP
 1,Oregon Street Hot Soups,2018-01-22 09:00:00,CREAM OF BROCCOLI SOUP
