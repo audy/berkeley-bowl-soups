@@ -10,7 +10,7 @@ database
 
 ## Analysis
 
-See ![results](Rplots.pdf)
+See [results](Rplots.pdf)
 
 `make && open Rplots.pdf`
 
