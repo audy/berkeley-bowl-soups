@@ -2,7 +2,6 @@ library(tidyverse)
 
 soups <- read_csv('soups-tidy.csv')
 
-
 soups %>%
   distinct(timestamp, location_name, soup) %>%
   group_by(location_name, soup) %>%
@@ -12,4 +11,5 @@ soups %>%
         y=count)) +
   geom_bar(stat='identity') +
   facet_wrap(~location_name) +
-  coord_flip()
+  coord_flip() +
+  ggtitle('Soup Popularity By Location')

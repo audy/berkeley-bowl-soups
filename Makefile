@@ -6,5 +6,5 @@ soups.csv:
 soups.tidy.csv:
 	./tidy-dump.py soups.sqlite soups-tidy.csv
 
-Rplots.pdf:
+Rplots.pdf: soups-analysis.R
 	Rscript soups-analysis.R
