@@ -6,6 +6,13 @@ database
 ## Requirements
 
 - Python 3
+- R+tidyverse (for analysis)
+
+## Analysis
+
+See [results](Rplots.pdf)
+
+`make && open Rplots.pdf`
 
 ## Installation & Usage
 
@@ -30,5 +37,3 @@ With CRON:
 # catch all the soups
 0 */4 * * * docker run --rm --volumes /root/soups/soups.sqlite:/data/soups.sqlite soups
 ```
-
-## Usage
