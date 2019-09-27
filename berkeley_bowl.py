@@ -4,40 +4,35 @@ from datetime import datetime
 import sys
 import dataset
 
+
 def database():
     db_path = sys.argv[1]
-    print('connecting to db {}'.format(db_path))
-    db = dataset.connect('sqlite:///{}'.format(db_path))
+    print("connecting to db {}".format(db_path))
+    db = dataset.connect("sqlite:///{}".format(db_path))
 
     return db
 
 
 def locations():
-    '''
+    """
     Scrape soups list of Berkeley Bowl's webpage.
-    '''
+    """
 
-    url = 'http://www.berkeleybowl.com/daily-hot-soup'
-
-    res = requests.get(url)
+    res = requests.get("https://www.berkeleybowl.com/", headers={"User-Agent": "Soup Scraper"})
 
     soup = BeautifulSoup(res.content, "html.parser")
 
-    locations = soup.find_all('div', class_='block-inner')[3:5]
+    home_soups = soup.find_all("section", id="home-soups")[0]
+
+    time_string = home_soups.find("strong").text
+    timestamp = datetime.strptime(time_string, "%m/%d/%Y")
+
+    locations = home_soups.find_all("div", class_="col-md-3")
 
     for location in locations:
 
-        location_name = location.find(class_='block-title').text
+        location_name = location.find("h2", class_="grn").text
 
-        time_string = location.find_all(class_='field-item')[0].text
-        timestamp = datetime.strptime(time_string, '%A, %B %d, %Y - %I:%M')
+        soups = [li.text for li in location.find("ul", class_="soup-list").find_all("li")]
 
-        # parse timestamp
-
-        soups = [ n.text for n in location.find_all(class_='field-item')[1:] ]
-
-        yield {
-            'name': location_name,
-            'timestamp': timestamp,
-            'soups': soups
-            }
+        yield {"name": location_name, "timestamp": timestamp, "soups": soups}
